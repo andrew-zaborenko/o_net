@@ -246,7 +246,7 @@ def plot_ced_2_predictors(errors_1, errors_2, threshold, name_1='Errors 1', name
     plt.grid(True)
     plt.xlim(0, threshold)
     plt.legend()
-    plt.show()
+    plt.savefig('CED.png')
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Face Landmarks Detection Inference")
