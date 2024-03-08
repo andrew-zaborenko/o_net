@@ -78,7 +78,7 @@ def load_landmarks(file_path):
         return np.array(landmarks)
 
 def inference_on_image_torch(image, model, gt_landmarks):
-    device = 'cuda'
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
     detector = dlib.get_frontal_face_detector()
     image = cv2.imread(image)
