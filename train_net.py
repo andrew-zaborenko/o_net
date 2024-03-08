@@ -125,10 +125,10 @@ def main(args):
     criterion = CustomMSELoss()
 
     # Training loop
-    for epoch in range(args.num_epochs):
+    for epoch in tqdm(range(args.num_epochs)):
         model.train()
         running_loss = 0.0
-        for images, landmarks in tqdm(dataloader_train):
+        for images, landmarks in dataloader_train:
             images, landmarks = images.to(device), landmarks.to(device)
             optimizer.zero_grad()
             outputs = model(images)
