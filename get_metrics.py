@@ -78,7 +78,7 @@ def load_landmarks(file_path):
         return np.array(landmarks)
 
 def inference_on_image_torch(image, model, gt_landmarks):
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    device = 'cuda'
     model.to(device)
     detector = dlib.get_frontal_face_detector()
     image = cv2.imread(image)
@@ -213,6 +213,20 @@ def calculate_auc(errors, threshold):
     auc = np.trapz(cumulative_percentage[sorted_errors <= threshold], sorted_errors[sorted_errors <= threshold])
     return auc
 
+def plot_ced(errors, threshold):
+    sorted_errors = np.sort(errors)
+    cumulative_percentage = np.arange(1, len(sorted_errors) + 1) / len(sorted_errors) * 100
+    auc = calculate_auc(errors, threshold)
+    
+    plt.plot(sorted_errors, cumulative_percentage, marker='o', linestyle='-', label=f'AUC up to {threshold:.2f}: {auc:.4f}')
+    plt.xlabel('Normalized Mean Squared Error')
+    plt.ylabel('Cumulative Percentage of Images (%)')
+    plt.title('Cumulative Error Distribution (CED), 300W test split')
+    plt.grid(True)
+    plt.xlim(0, threshold)
+    plt.legend()
+    plt.show()
+
 def plot_ced_2_predictors(errors_1, errors_2, threshold, name_1='Errors 1', name_2='Errors 2'):
     sorted_errors_1 = np.sort(errors_1)
     sorted_errors_2 = np.sort(errors_2)
@@ -232,7 +246,7 @@ def plot_ced_2_predictors(errors_1, errors_2, threshold, name_1='Errors 1', name
     plt.grid(True)
     plt.xlim(0, threshold)
     plt.legend()
-    plt.savefig('CED_plot.png')
+    plt.show()
 
 def parse_args():
     parser = argparse.ArgumentParser(description="Face Landmarks Detection Inference")
