@@ -105,7 +105,7 @@ def detect_face_and_resize(image, landmarks):
         face_image = image[best_face.top():best_face.bottom(), best_face.left():best_face.right()]
         face_image_resized = cv2.resize(face_image, (48, 48))
     except Exception as e:
-        print(f"Error cropping/resizing face: {e}")
+        # print(f"Error cropping/resizing face: {e}")
         return None, None
 
     return face_image_resized, np.array(landmarks_new)
