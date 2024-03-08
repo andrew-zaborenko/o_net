@@ -1,0 +1,13 @@
+collections
+cv2
+dlib
+matplotlib.pyplot
+numpy
+torch
+torch.nn
+torch.nn.functional
+torch.optim
+torch.utils.data
+torchvision
+torchvision.transforms
+tqdm
