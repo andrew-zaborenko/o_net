@@ -123,6 +123,7 @@ def main(args):
     # Define optimizer and loss function
     optimizer = optim.Adam(model.parameters(), lr=args.learning_rate)
     criterion = CustomMSELoss()
+    best_test_loss = float('inf')
 
     # Training loop
     for epoch in tqdm(range(args.num_epochs)):
@@ -149,6 +150,9 @@ def main(args):
                 test_loss += criterion(outputs, landmarks).item()
 
         test_loss /= len(dataloader_test)
+        if test_loss < best_test_loss:
+            best_test_loss = test_loss
+            torch.save(model, 'best_model.pt')
         print(f'Epoch {epoch+1}/{args.num_epochs}, Test Loss: {test_loss}')
 
 # Define command-line arguments
