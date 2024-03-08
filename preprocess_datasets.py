@@ -231,4 +231,4 @@ if __name__ == "__main__":
     args = parser.parse_args()
     main(args)
 
-# python preprocess_datasets.py --menpo_train_path './landmarks_task/Menpo/train/' --w_train_path './landmarks_task/300W/train/' --menpo_test_path './landmarks_task/Menpo/test/' --w_test_path './landmarks_task/300W/test/'
+# python preprocess_datasets.py --menpo_train './landmarks_task/Menpo/train/' --w_train './landmarks_task/300W/train/' --menpo_test './landmarks_task/Menpo/test/' --w_test './landmarks_task/300W/test/'
