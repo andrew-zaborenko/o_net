@@ -10,6 +10,7 @@ from torch.utils.data import Dataset, DataLoader
 from tqdm import tqdm
 import matplotlib.pyplot as plt
 from torchvision import transforms
+
 import argparse
 
 class Flatten(nn.Module):
@@ -68,6 +69,18 @@ class ONet(nn.Module):
         x = self.features(x)
         landmarks = self.output_layer(x)
         return landmarks
+
+def visualize_face_with_original_landmarks(image, landmarks_original):
+    image = cv2.imread(image)
+    plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+    
+    for landmark in landmarks_original:
+        x, y = landmark
+        if x != -1 and y != -1:
+            plt.scatter(x, y, color='red', s=5)
+    
+    plt.axis('off')
+    plt.show()
 
 def load_landmarks(file_path):
     with open(file_path, 'r') as f:
