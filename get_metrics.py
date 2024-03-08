@@ -264,7 +264,7 @@ def main(args):
         img_name = os.path.join(args.root_dir, image_files[i])
         gt_landmark_name = os.path.join(args.root_dir, landmarks_files[i])
         try:
-            pred_landmarks_torch.append(inference_on_image(img_name, model, load_landmarks(gt_landmark_name)))
+            pred_landmarks_torch.append(inference_on_image_torch(img_name, model, load_landmarks(gt_landmark_name)))
             pred_landmarks_dlib.append(inference_on_image_dlib(img_name, load_landmarks(gt_landmark_name)))
             gt_landmarks.append(load_landmarks(gt_landmark_name))
         except:
